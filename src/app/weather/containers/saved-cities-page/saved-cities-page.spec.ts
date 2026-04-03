@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SavedCities } from './saved-cities';
+import { SavedCities } from '../../services/saved-cities';
 
 describe('SavedCities', () => {
   let component: SavedCities;
