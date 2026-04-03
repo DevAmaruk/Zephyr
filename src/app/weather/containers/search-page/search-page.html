@@ -1,0 +1,11 @@
+<div>
+  <input (input)="onInputChange($event.target.value)" />
+  @if (geocodingData$ | async; as geocodingData) {
+    <ul>
+      @for (city of geocodingData.results; track city.id) {
+        <li (click)="onSelectCity(city)">{{ city.country }} - {{ city.name }}</li>
+      }
+    </ul>
+  }
+  <button (click)="onGetWeather()">Get Weather</button>
+</div>
