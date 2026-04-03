@@ -1,0 +1,33 @@
+<header>
+  <h1>Zephyr</h1>
+</header>
+
+<main>
+  <section class="weather-card">
+    @if (weatherData$ | async; as weatherData) {
+      <app-weather-card
+        [cityName]="currentCity?.name"
+        [currentTemperature]="weatherData.current.temperature_2m"
+        [feelsLikeTemperature]="weatherData.current.apparent_temperature"
+        [weatherCode]="weatherData.current.weather_code"
+        [temperatureUnit]="settings.temperatureUnit"
+        [currentLanguage]="settings.language"
+        (saveCityButton)="onSaveCity()"
+        (cardTapped)="onCardTapped()"
+      />
+    } @else {
+      <p>Bienvenue sur Zephyr. Une application météo qui se veut simple mais élégante.</p>
+      <p>
+        Pour commencer, recherchez une ville en cliquant sur le bouton de recherche en bas à droite.
+      </p>
+    }
+  </section>
+
+  <button (click)="onSearchCity()">Rechercher une ville</button>
+  <button (click)="onSavedCitiesList()">Villes Sauvegardées</button>
+</main>
+
+<footer>
+  <button (click)="onSettings()">Paramètres</button>
+  <p>powered by Open-Meteo API</p>
+</footer>

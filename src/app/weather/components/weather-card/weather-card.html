@@ -1,0 +1,10 @@
+<div (click)="onCardTapped()">
+  <p>{{ cityName }}</p>
+  <p>{{ currentTemperature }} {{ temperatureUnit | temperatureUnitConversion }}</p>
+  <p>{{ feelsLikeTemperature }} {{ temperatureUnit | temperatureUnitConversion }}</p>
+  <p>{{ weatherCode | weatherCodeConversion: currentLanguage }}</p>
+</div>
+
+<div>
+  <button (click)="onSaveCity()">Save City</button>
+</div>

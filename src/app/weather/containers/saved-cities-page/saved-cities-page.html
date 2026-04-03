@@ -1,0 +1,15 @@
+<header>
+  <h1>Villes sauvegardées</h1>
+  <button (click)="backToHomepage()">Retour à la page principale</button>
+</header>
+
+<main>
+  <ul>
+    @for (city of savedCitiesList; track city.name) {
+      <li>
+        <span (click)="onSelectCity(city)">{{ city.name }} - {{ city.country }}</span>
+        <button (click)="onDeleteCity(city)">Supprimer la ville</button>
+      </li>
+    }
+  </ul>
+</main>
