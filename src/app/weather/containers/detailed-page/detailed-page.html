@@ -1,0 +1,75 @@
+<div>
+  @if (weatherData) {
+    <h2>UV Index: {{ weatherData.daily.uv_index_max[0] | roundNumber }}</h2>
+    <h2>Précipitation: {{ weatherData.current.precipitation }} %</h2>
+    @if (settings) {
+      <h2>
+        Vent: {{ weatherData.current.wind_direction_10m }}°
+        {{ weatherData.current.wind_direction_10m | windDirectionConversion }} -
+        {{ weatherData.current.wind_speed_10m }} {{ settings.windSpeedUnit }}
+      </h2>
+    }
+    <h2>Pression: {{ weatherData.current.pressure_msl | roundNumber }} hPa</h2>
+  }
+</div>
+<div>
+  <h2>Prévisions détaillées</h2>
+  <h3>Température</h3>
+  @if (settings) {
+    @if (weatherData) {
+      <ul>
+        @for (hourlyForecast of weatherData.hourly.time; track $index; let i = $index) {
+          <li>
+            {{ weatherData.hourly.time[i] | date: 'HH:mm' }} -
+            {{ weatherData.hourly.temperature_2m[i] }}
+            {{ settings.temperatureUnit | temperatureUnitConversion }}
+          </li>
+        }
+      </ul>
+    }
+  }
+</div>
+<div>
+  <h3>Lever et coucher du soleil</h3>
+  @if (weatherData) {
+    <ul>
+      @for (sunriseTime of weatherData.daily.sunrise; track $index; let i = $index) {
+        <li>
+          {{ weatherData.daily.sunrise[i] | date: 'HH:mm' }} -
+          {{ weatherData.daily.sunset[i] | date: 'HH:mm' }}
+        </li>
+      }
+    </ul>
+  }
+</div>
+
+<div>
+  <h2>Prévisions de la semaine</h2>
+  @if (settings) {
+    @if (weatherData) {
+      <ul>
+        @for (weeklyForecast of weatherData.daily.time; track $index; let i = $index) {
+          <li>
+            {{ weatherData.daily.time[i] | date: 'EEEE' }} -
+            {{ weatherData.daily.time[i] | date: 'dd MMMM' }} -
+            <img
+              [src]="weatherData.daily.weather_code[i] | weatherIconsConversion"
+              alt="Weather Icon"
+              style="width: 50px; height: 50px"
+            />
+            - MinTemp: {{ weatherData.daily.temperature_2m_min[i] }}
+            {{ settings.temperatureUnit | temperatureUnitConversion }} - MaxTemp:
+            {{ weatherData.daily.temperature_2m_max[i] }}
+            {{ settings.temperatureUnit | temperatureUnitConversion }} - Precipitation:
+            {{ weatherData.daily.precipitation_sum[i] }}
+            {{ settings.precipitationUnit }}
+          </li>
+        }
+      </ul>
+    }
+  }
+</div>
+
+<div>
+  <button (click)="onBackToHomepage()">Retour à l'accueil</button>
+</div>
