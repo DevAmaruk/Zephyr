@@ -7,7 +7,7 @@ import { SavedCitiesInterface } from '../../interfaces/saved-cities-interface';
   selector: 'app-saved-cities-page',
   imports: [],
   templateUrl: './saved-cities-page.html',
-  styleUrl: './saved-cities.scss',
+  styleUrl: './saved-cities-page.scss',
 })
 export class SavedCitiesPage {
   private readonly _router = inject(Router);
