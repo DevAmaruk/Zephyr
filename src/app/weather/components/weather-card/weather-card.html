@@ -1,10 +1,21 @@
-<div (click)="onCardTapped()">
-  <p>{{ cityName }}</p>
-  <p>{{ currentTemperature }} {{ temperatureUnit | temperatureUnitConversion }}</p>
-  <p>{{ feelsLikeTemperature }} {{ temperatureUnit | temperatureUnitConversion }}</p>
-  <p>{{ weatherCode | weatherCodeConversion: currentLanguage }}</p>
-</div>
-
-<div>
-  <button (click)="onSaveCity()">Save City</button>
-</div>
+<article class="weather-card" (click)="onCardTapped()">
+  <header>
+    <h2>{{ cityName }}</h2>
+  </header>
+  <section>
+    <p>
+      <span>{{ currentTemperature }}</span>
+      <span>{{ temperatureUnit | temperatureUnitConversion }}</span>
+    </p>
+    <p>
+      <span>{{ feelsLikeTemperature }}</span>
+      <span>{{ temperatureUnit | temperatureUnitConversion }}</span>
+    </p>
+    <p>
+      <span>{{ weatherCode | weatherCodeConversion: currentLanguage }}</span>
+    </p>
+  </section>
+  <section>
+    <button (click)="onSaveCity(); $event.stopPropagation()">&#9825;</button>
+  </section>
+</article>
