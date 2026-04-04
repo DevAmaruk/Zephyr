@@ -43,6 +43,7 @@ export class SearchPage implements OnInit {
 
   public onSelectCity(city: GeocodingResult) {
     this.selectedCity = {
+      id: city.id,
       name: city.name,
       country: city.country,
       lat: city.latitude,
