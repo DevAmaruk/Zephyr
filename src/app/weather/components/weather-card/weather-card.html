@@ -16,6 +16,10 @@
     </p>
   </section>
   <section>
-    <button (click)="onSaveCity(); $event.stopPropagation()">&#9825;</button>
+    @if (!isCitySaved) {
+      <button (click)="onSaveCity(); $event.stopPropagation()">&#9825;</button>
+    } @else {
+      <button (click)="onSaveCity(); $event.stopPropagation()">&#9829;</button>
+    }
   </section>
 </article>
