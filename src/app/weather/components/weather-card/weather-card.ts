@@ -14,6 +14,7 @@ export class WeatherCard {
   @Input() feelsLikeTemperature?: number;
   @Input() cityName?: string;
   @Input() weatherCode: number = 0;
+  @Input() isCitySaved: boolean = false;
 
   @Input() temperatureUnit: SettingsInterface['temperatureUnit'] = 'celsius';
   @Input() currentLanguage: SettingsInterface['language'] = 'fr';
