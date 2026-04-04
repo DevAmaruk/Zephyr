@@ -30,16 +30,20 @@ export class Homepage implements OnInit {
 
   protected settings: SettingsInterface = this.settingsService.getSettings();
 
+  protected isCitySaved: boolean = false;
+
   ngOnInit() {
     this.weatherData$ = this._activatedRoute.queryParams.pipe(
       filter((params) => params['lat'] && params['lon']),
       tap((params) => {
         this.currentCity = {
+          id: params['id'],
           name: params['name'],
           lat: params['lat'],
           lon: params['lon'],
           country: params['country'],
         };
+        this.isCitySaved = this.savedCitiesService.isCitySaved(this.currentCity);
       }),
       switchMap((params) =>
         this.weatherService.getWeather(
@@ -66,7 +70,12 @@ export class Homepage implements OnInit {
 
   public onSaveCity() {
     if (this.currentCity) {
-      this.savedCitiesService.save(this.currentCity);
+      if (this.isCitySaved) {
+        this.savedCitiesService.delete(this.currentCity);
+      } else {
+        this.savedCitiesService.save(this.currentCity);
+      }
+      this.isCitySaved = this.savedCitiesService.isCitySaved(this.currentCity);
     }
   }
 
