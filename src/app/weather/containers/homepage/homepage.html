@@ -14,6 +14,7 @@
         [currentLanguage]="settings.language"
         (saveCityButton)="onSaveCity()"
         (cardTapped)="onCardTapped()"
+        [isCitySaved]="isCitySaved"
       />
     } @else {
       <p>Bienvenue sur Zephyr. Une application météo qui se veut simple mais élégante.</p>
