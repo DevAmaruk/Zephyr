@@ -2,24 +2,23 @@
   <header>
     <h2>{{ cityName }}</h2>
   </header>
-  <section>
+
+  <section class="weather-data">
     <p>
-      <span>{{ currentTemperature }}</span>
-      <span>{{ temperatureUnit | temperatureUnitConversion }}</span>
+      <span class="temperature">{{ currentTemperature }}</span>
+      <span class="unit">{{ temperatureUnit | temperatureUnitConversion }}</span>
     </p>
     <p>
-      <span>{{ feelsLikeTemperature }}</span>
-      <span>{{ temperatureUnit | temperatureUnitConversion }}</span>
+      <span class="feels-like">{{ feelsLikeTemperature }}</span>
+      <span class="unit">{{ temperatureUnit | temperatureUnitConversion }}</span>
     </p>
     <p>
-      <span>{{ weatherCode | weatherCodeConversion: currentLanguage }}</span>
+      <span class="weather-code">{{ weatherCode | weatherCodeConversion: currentLanguage }}</span>
     </p>
   </section>
-  <section>
-    @if (!isCitySaved) {
-      <button (click)="onSaveCity(); $event.stopPropagation()">&#9825;</button>
-    } @else {
-      <button (click)="onSaveCity(); $event.stopPropagation()">&#9829;</button>
-    }
-  </section>
+  @if (!isCitySaved) {
+    <button (click)="onSaveCity(); $event.stopPropagation()">&#9825;</button>
+  } @else {
+    <button (click)="onSaveCity(); $event.stopPropagation()">&#9829;</button>
+  }
 </article>
