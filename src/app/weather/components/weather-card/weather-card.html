@@ -1,4 +1,4 @@
-<article class="weather-card" (click)="onCardTapped()">
+<article class="weather-container" (click)="onCardTapped()">
   <header>
     <h2>{{ cityName }}</h2>
   </header>
@@ -6,19 +6,23 @@
   <section class="weather-data">
     <p>
       <span class="temperature">{{ currentTemperature }}</span>
-      <span class="unit">{{ temperatureUnit | temperatureUnitConversion }}</span>
+      <span class="unit-temperature">{{ temperatureUnit | temperatureUnitConversion }}</span>
     </p>
     <p>
       <span class="feels-like">{{ feelsLikeTemperature }}</span>
-      <span class="unit">{{ temperatureUnit | temperatureUnitConversion }}</span>
+      <span class="unit-feels-like">{{ temperatureUnit | temperatureUnitConversion }}</span>
     </p>
     <p>
       <span class="weather-code">{{ weatherCode | weatherCodeConversion: currentLanguage }}</span>
     </p>
   </section>
   @if (!isCitySaved) {
-    <button (click)="onSaveCity(); $event.stopPropagation()">&#9825;</button>
+    <button (click)="onSaveCity(); $event.stopPropagation()" type="button" aria-label="Save city">
+      <img src="icons/save-button-icon.svg" alt="save-button-icon" />
+    </button>
   } @else {
-    <button (click)="onSaveCity(); $event.stopPropagation()">&#9829;</button>
+    <button (click)="onSaveCity(); $event.stopPropagation()" type="button" aria-label="Unsave city">
+      <img src="icons/save-button-filled.svg" alt="unsave-button-icon" />
+    </button>
   }
 </article>
