@@ -46,6 +46,7 @@ export class SearchPage implements OnInit {
       id: city.id,
       name: city.name,
       country: city.country,
+      country_code: city.country_code,
       lat: city.latitude,
       lon: city.longitude,
     };
