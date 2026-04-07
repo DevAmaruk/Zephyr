@@ -5,14 +5,14 @@ import { SettingsInterface } from '../../interfaces/settings-interface';
 import { filter, Observable, switchMap, tap } from 'rxjs';
 import { WeatherInterface } from '../../interfaces/weather-interface';
 import { WeatherCard } from '../../components/weather-card/weather-card';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SavedCitiesInterface } from '../../interfaces/saved-cities-interface';
 import { SavedCities } from '../../services/saved-cities';
 
 @Component({
   selector: 'app-homepage',
-  imports: [WeatherCard, AsyncPipe],
+  imports: [WeatherCard, AsyncPipe, NgOptimizedImage],
   templateUrl: './homepage.html',
   styleUrl: './homepage.scss',
 })
@@ -42,6 +42,7 @@ export class Homepage implements OnInit {
           lat: params['lat'],
           lon: params['lon'],
           country: params['country'],
+          country_code: params['country_code'],
         };
         this.isCitySaved = this.savedCitiesService.isCitySaved(this.currentCity);
       }),
