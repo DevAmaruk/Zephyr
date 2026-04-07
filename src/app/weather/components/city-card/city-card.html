@@ -1,0 +1,17 @@
+<article class="city-card-container">
+  <section class="card">
+    @if (city) {
+      <img
+        [ngSrc]="
+          'https://hatscripts.github.io/circle-flags/flags/' +
+          city.country_code.toLowerCase() +
+          '.svg'
+        "
+        width="36"
+        height="36"
+        [alt]="city.name + ' flag'"
+      />
+      <h3>{{ city.name }}</h3>
+    }
+  </section>
+</article>
