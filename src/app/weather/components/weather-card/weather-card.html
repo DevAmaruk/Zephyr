@@ -18,11 +18,11 @@
   </section>
   @if (!isCitySaved) {
     <button (click)="onSaveCity(); $event.stopPropagation()" type="button" aria-label="Save city">
-      <img src="icons/save-button-icon.svg" alt="save-button-icon" />
+      <img ngSrc="icons/save-button-icon.svg" width="32" height="32" alt="save-button-icon" />
     </button>
   } @else {
     <button (click)="onSaveCity(); $event.stopPropagation()" type="button" aria-label="Unsave city">
-      <img src="icons/save-button-filled.svg" alt="unsave-button-icon" />
+      <img ngSrc="icons/save-button-filled.svg" width="32" height="32" alt="unsave-button-icon" />
     </button>
   }
 </article>
