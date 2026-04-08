@@ -1,11 +1,24 @@
-<div>
-  <input (input)="onInputChange($event.target.value)" />
+<header>
+  <img
+    ngSrc="icons/back_button_icon.svg"
+    width="24"
+    height="24"
+    alt="back button"
+    (click)="onBackToHomepage()"
+  />
+  <input
+    (input)="onInputChange($event.target.value)"
+    placeholder="Entrez le nom d'une ville"
+    type="search"
+  />
+</header>
+
+<main>
   @if (geocodingData$ | async; as geocodingData) {
-    <ul>
-      @for (city of geocodingData.results; track city.id) {
-        <li (click)="onSelectCity(city)">{{ city.country }} - {{ city.name }}</li>
-      }
-    </ul>
+    @for (city of geocodingData.results; track city.id) {
+      <app-city-card [city]="city" (citySelected)="onSelectCity($event)" />
+    }
   }
-  <button (click)="onGetWeather()">Get Weather</button>
-</div>
+
+  <button (click)="onGetWeather()" type="button">Obtenir la météo</button>
+</main>
