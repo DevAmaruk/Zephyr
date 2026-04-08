@@ -11,4 +11,10 @@ import { NgOptimizedImage } from '@angular/common';
 export class CityCard {
   @Input() city?: GeocodingResult;
   @Output() citySelected = new EventEmitter<GeocodingResult>();
+
+  public onCitySelected() {
+    if (this.city) {
+      this.citySelected.emit(this.city);
+    }
+  }
 }
