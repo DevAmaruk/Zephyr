@@ -11,7 +11,12 @@
         height="36"
         [alt]="city.name + ' flag'"
       />
-      <h3>{{ city.name }}</h3>
+      <p>{{ city.name }}</p>
+    }
+    @if (isSelected) {
+      <span class="checkmark"
+        ><img ngSrc="icons/checkmark-icon.svg" width="24" height="24" alt="selected city"
+      /></span>
     }
   </section>
 </article>
