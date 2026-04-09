@@ -31,6 +31,7 @@ export class Homepage implements OnInit {
   protected settings: SettingsInterface = this.settingsService.getSettings();
 
   protected isCitySaved: boolean = false;
+  protected cityJustSaved: boolean = false;
 
   ngOnInit() {
     this.weatherData$ = this._activatedRoute.queryParams.pipe(
@@ -75,6 +76,8 @@ export class Homepage implements OnInit {
         this.savedCitiesService.delete(this.currentCity);
       } else {
         this.savedCitiesService.save(this.currentCity);
+        this.cityJustSaved = true;
+        setTimeout(() => (this.cityJustSaved = false), 500);
       }
       this.isCitySaved = this.savedCitiesService.isCitySaved(this.currentCity);
     }
