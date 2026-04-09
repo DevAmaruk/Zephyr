@@ -16,13 +16,31 @@
       <span class="weather-code">{{ weatherCode | weatherCodeConversion: currentLanguage }}</span>
     </p>
   </section>
-  @if (!isCitySaved) {
-    <button (click)="onSaveCity(); $event.stopPropagation()" type="button" aria-label="Save city">
-      <img ngSrc="icons/save-button-icon.svg" width="32" height="32" alt="save-button-icon" />
-    </button>
-  } @else {
-    <button (click)="onSaveCity(); $event.stopPropagation()" type="button" aria-label="Unsave city">
-      <img ngSrc="icons/save-button-filled.svg" width="32" height="32" alt="unsave-button-icon" />
-    </button>
-  }
+  <footer>
+    @if (!isCitySaved) {
+      <button (click)="onSaveCity(); $event.stopPropagation()" type="button" aria-label="Save city">
+        <img
+          ngSrc="icons/save-button-icon.svg"
+          width="32"
+          height="32"
+          alt="save-button-icon"
+          class="save-icon"
+        />
+      </button>
+    } @else {
+      <button
+        (click)="onSaveCity(); $event.stopPropagation()"
+        type="button"
+        aria-label="Unsave city"
+      >
+        <img
+          ngSrc="icons/save-button-filled.svg"
+          width="32"
+          height="32"
+          alt="unsave-button-icon"
+          class="wiggle"
+        />
+      </button>
+    }
+  </footer>
 </article>
