@@ -1,76 +1,105 @@
 <header>
-  <h1>Paramètres</h1>
-  <button (click)="onBackToHomepage()">Retour page principale</button>
+  <img src="icons/back_button_icon.svg" alt="back button" (click)="onBackToHomepage()" />
+  <h2>Paramètres</h2>
+  <div></div>
 </header>
 
 <main>
-  <div>
-    <h2>Langue</h2>
-    <input type="radio" name="language" value="fr" (change)="onLanguageChange('fr')" />
-    <label for="fr">Français</label>
-    <input type="radio" name="language" value="en" (change)="onLanguageChange('en')" />
-    <label for="en">Anglais</label>
-  </div>
+  <p class="section-label">Langue</p>
+  <section class="card">
+    <label class="option">
+      <input type="radio" name="language" value="fr" (change)="onLanguageChange('fr')" />
+      Français
+    </label>
+    <label class="option">
+      <input type="radio" name="language" value="en" (change)="onLanguageChange('en')" />
+      Anglais
+    </label>
+  </section>
 
-  <div>
-    <h2>Apparence</h2>
-    <input type="radio" name="theme" value="system" (change)="onThemeChange('system')" />
-    <label for="system">Système</label>
-    <input type="radio" name="theme" value="light" (change)="onThemeChange('light')" />
-    <label for="light">Clair</label>
-    <input type="radio" name="theme" value="dark" (change)="onThemeChange('dark')" />
-    <label for="dark">Sombre</label>
-  </div>
+  <p class="section-label">Apparence</p>
+  <section class="card">
+    <label class="option">
+      <input type="radio" name="theme" value="system" (change)="onThemeChange('system')" />
+      Système
+    </label>
+    <label class="option">
+      <input type="radio" name="theme" value="light" (change)="onThemeChange('light')" />
+      Clair
+    </label>
+    <label class="option">
+      <input type="radio" name="theme" value="dark" (change)="onThemeChange('dark')" />
+      Sombre
+    </label>
+  </section>
 
-  <div>
-    <h2>Unité de température</h2>
-    <input
-      type="radio"
-      name="temperatureUnit"
-      value="celsius"
-      (change)="onTemperatureUnitChange('celsius')"
-    />
-    <label for="celsius">Celsius</label>
-    <input
-      type="radio"
-      name="temperatureUnit"
-      value="fahrenheit"
-      (change)="onTemperatureUnitChange('fahrenheit')"
-    />
-    <label for="fahrenheit">Fahrenheit</label>
-  </div>
+  <p class="section-label">Température</p>
+  <section class="card">
+    <label class="option">
+      <input
+        type="radio"
+        name="temperatureUnit"
+        value="celsius"
+        (change)="onTemperatureUnitChange('celsius')"
+      />
+      Celsius °C
+    </label>
+    <label class="option">
+      <input
+        type="radio"
+        name="temperatureUnit"
+        value="fahrenheit"
+        (change)="onTemperatureUnitChange('fahrenheit')"
+      />
+      Fahrenheit °F
+    </label>
+  </section>
 
-  <div>
-    <h2>Unité de vitesse du vent</h2>
-    <input type="radio" name="windUnit" value="kmh" (change)="onWindUnitChange('kmh')" />
-    <label for="kmh">km/h</label>
-    <input type="radio" name="windUnit" value="mph" (change)="onWindUnitChange('mph')" />
-    <label for="mph">mph</label>
-    <input type="radio" name="windUnit" value="ms" (change)="onWindUnitChange('ms')" />
-    <label for="m/s">m/s</label>
-    <input type="radio" name="windUnit" value="kn" (change)="onWindUnitChange('kn')" />
-    <label for="knots">knots</label>
-  </div>
+  <p class="section-label">Vitesse du vent</p>
+  <section class="card wind-grid">
+    <label class="option">
+      <input type="radio" name="windUnit" value="kmh" (change)="onWindUnitChange('kmh')" />
+      km/h
+    </label>
+    <label class="option">
+      <input type="radio" name="windUnit" value="mph" (change)="onWindUnitChange('mph')" />
+      mph
+    </label>
+    <label class="option">
+      <input type="radio" name="windUnit" value="ms" (change)="onWindUnitChange('ms')" />
+      m/s
+    </label>
+    <label class="option">
+      <input type="radio" name="windUnit" value="kn" (change)="onWindUnitChange('kn')" />
+      knots
+    </label>
+  </section>
 
-  <div>
-    <h2>Unité de précipitation</h2>
-    <input
-      type="radio"
-      name="precipitationUnit"
-      value="mm"
-      (change)="onPrecipitationUnitChange('mm')"
-    />
-    <label for="mm">mm</label>
-    <input
-      type="radio"
-      name="precipitationUnit"
-      value="inches"
-      (change)="onPrecipitationUnitChange('inch')"
-    />
-    <label for="inches">inches</label>
-  </div>
-
-  <div>
-    <button (click)="onSaveSettings()">Sauvgarder</button>
-  </div>
+  <p class="section-label">Précipitation</p>
+  <section class="card">
+    <label class="option">
+      <input
+        type="radio"
+        name="precipitationUnit"
+        value="mm"
+        (change)="onPrecipitationUnitChange('mm')"
+      />
+      Millimètres (mm)
+    </label>
+    <label class="option">
+      <input
+        type="radio"
+        name="precipitationUnit"
+        value="inch"
+        (change)="onPrecipitationUnitChange('inch')"
+      />
+      Pouces (in)
+    </label>
+  </section>
 </main>
+
+<footer class="save-area">
+  <button type="button" class="save-btn" (click)="onSaveSettings()">
+    Sauvegarder les paramètres
+  </button>
+</footer>
