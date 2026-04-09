@@ -16,7 +16,11 @@
 <main>
   @if (geocodingData$ | async; as geocodingData) {
     @for (city of geocodingData.results; track city.id) {
-      <app-city-card [city]="city" (citySelected)="onSelectCity($event)" />
+      <app-city-card
+        [city]="city"
+        (citySelected)="onSelectCity($event)"
+        [isSelected]="selectedCityID === city.id"
+      />
     }
   }
 

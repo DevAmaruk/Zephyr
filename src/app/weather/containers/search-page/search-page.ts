@@ -30,6 +30,8 @@ export class SearchPage implements OnInit {
   protected geocodingData$?: Observable<GeocodingInterface>;
   protected selectedCity?: SavedCitiesInterface;
 
+  protected selectedCityID: number = 0;
+
   settings: SettingsInterface = this.settingsService.getSettings();
 
   ngOnInit() {
@@ -51,6 +53,7 @@ export class SearchPage implements OnInit {
       lat: city.latitude,
       lon: city.longitude,
     };
+    this.selectedCityID = city.id;
   }
 
   public onInputChange(query: string) {
