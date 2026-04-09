@@ -20,6 +20,8 @@ export class WeatherCard {
   @Input() temperatureUnit: SettingsInterface['temperatureUnit'] = 'celsius';
   @Input() currentLanguage: SettingsInterface['language'] = 'fr';
 
+  @Input() cityJustSaved: boolean = false;
+
   @Output() saveCityButton = new EventEmitter<void>();
   @Output() cardTapped = new EventEmitter<void>();
 
