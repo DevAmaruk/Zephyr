@@ -1,11 +1,3 @@
-// Zephyr color palette
-$palladian: #eee9df;
-$oatmeal: #c9c1b1;
-$blue-fantastic: #2c3b4d;
-$burning-flame: #ffb162;
-$truffle: #a35139;
-$abyss: #1b2632;
-
 :host {
   display: flex;
   flex-direction: column;
@@ -28,7 +20,7 @@ header {
   h2 {
     font-size: 1.25rem;
     font-weight: 500;
-    color: $abyss;
+    color: var(--abyss);
     text-align: center;
     letter-spacing: 0.02em;
   }
@@ -48,18 +40,18 @@ main {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: $blue-fantastic;
+  color: var(--blue-fantastic);
   opacity: 0.6;
   padding: 0 0.25rem;
   margin-bottom: -0.25rem;
 }
 
 .card {
-  background: $palladian;
+  background: var(--palladian);
   border-radius: 1rem;
   overflow: hidden;
-  border: 1px solid $truffle;
-  box-shadow: 0 1px 2px $blue-fantastic;
+  border: 1px solid var(--truffle);
+  box-shadow: 0 1px 2px var(--blue-fantastic);
 
   &.wind-grid {
     display: grid;
@@ -67,11 +59,11 @@ main {
 
     .option:nth-child(1),
     .option:nth-child(2) {
-      border-bottom: 0.5px solid $oatmeal;
+      border-bottom: 0.5px solid var(--oatmeal);
     }
 
     .option:nth-child(odd) {
-      border-right: 0.5px solid $oatmeal;
+      border-right: 0.5px solid var(--oatmeal);
     }
     ::after {
       display: none;
@@ -94,7 +86,7 @@ main {
     left: 1rem;
     right: 0;
     height: 0.5px;
-    background: $oatmeal;
+    background: var(--oatmeal);
   }
 
   &:hover {
@@ -111,7 +103,7 @@ main {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 2px solid $oatmeal;
+    border: 2px solid var(--oatmeal);
     margin-right: 0.75rem;
     flex-shrink: 0;
     transition: all 0.2s;
@@ -119,8 +111,8 @@ main {
     cursor: pointer;
 
     &:checked {
-      border-color: $burning-flame;
-      background: $burning-flame;
+      border-color: var(--burning-flame);
+      background: var(--burning-flame);
       box-shadow: 0 0 0 3px rgba(255, 177, 98, 0.2);
 
       &::after {
@@ -140,7 +132,7 @@ main {
   label {
     font-size: 0.95rem;
     font-weight: 400;
-    color: $abyss;
+    color: var(--abyss);
     cursor: pointer;
     flex: 1;
     transition:
@@ -150,7 +142,7 @@ main {
 
   input[type='radio']:checked + label {
     font-weight: 500;
-    color: $truffle;
+    color: var(--truffle);
   }
 }
 
@@ -163,19 +155,19 @@ main {
   padding: 0.9rem;
   border-radius: 0.875rem;
   border: none;
-  background: $burning-flame;
-  color: $abyss;
+  background: var(--burning-flame);
+  color: var(--abyss);
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   cursor: pointer;
-  box-shadow: 0 3px 3px $blue-fantastic;
+  box-shadow: 0 3px 3px var(--blue-fantastic);
   transition:
-    transform 0.15s,
-    box-shadow 0.15s;
+    transform 0.3s,
+    box-shadow 0.3s;
 
   &:active {
-    transform: scale(0.98);
+    transform: scale(0.95);
     box-shadow: 0 2px 8px rgba(255, 177, 98, 0.3);
   }
 }

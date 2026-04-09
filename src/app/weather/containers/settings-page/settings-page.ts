@@ -49,6 +49,8 @@ export class SettingsPage {
 
   public onSaveSettings() {
     this.settingsService.saveSettings(this.settings);
-    this.onBackToHomepage();
+    setTimeout(() => {
+      this.onBackToHomepage();
+    }, 150);
   }
 }
