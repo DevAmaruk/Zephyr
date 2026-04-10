@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { GeocodingResult } from '../../interfaces/geocoding-interface';
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
@@ -9,14 +8,16 @@ import { NgOptimizedImage } from '@angular/common';
   styleUrl: './city-card.scss',
 })
 export class CityCard {
-  @Input() city?: GeocodingResult;
+  @Input() cityName?: string;
+  @Input() countryCode?: string;
   @Input() isSelected: boolean = false;
+  @Input() translateX: number = 0;
 
-  @Output() citySelected = new EventEmitter<GeocodingResult>();
+  @Output() cardTapped = new EventEmitter<void>();
 
   public onCitySelected() {
-    if (this.city) {
-      this.citySelected.emit(this.city);
+    if (this.cityName) {
+      this.cardTapped.emit();
     }
   }
 }
