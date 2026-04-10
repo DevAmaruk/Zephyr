@@ -8,6 +8,7 @@ import { GeocodingInterface, GeocodingResult } from '../../interfaces/geocoding-
 import { SavedCitiesInterface } from '../../interfaces/saved-cities-interface';
 import { SettingsInterface } from '../../interfaces/settings-interface';
 import { CityCard } from '../../components/city-card/city-card';
+import { SavedCities } from '../../services/saved-cities';
 
 @Component({
   selector: 'app-search-page',

@@ -17,8 +17,9 @@
   @if (geocodingData$ | async; as geocodingData) {
     @for (city of geocodingData.results; track city.id) {
       <app-city-card
-        [city]="city"
-        (citySelected)="onSelectCity($event)"
+        [cityName]="city.name"
+        [countryCode]="city.country_code"
+        (cardTapped)="onSelectCity(city)"
         [isSelected]="selectedCityID === city.id"
       />
     }
