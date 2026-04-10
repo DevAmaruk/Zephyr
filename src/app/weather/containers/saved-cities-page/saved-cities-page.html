@@ -1,15 +1,23 @@
 <header>
-  <h1>Villes sauvegardées</h1>
-  <button (click)="backToHomepage()">Retour à la page principale</button>
+  <img src="icons/back_button_icon.svg" alt="back button" (click)="backToHomepage()" />
+  <h2>Villes sauvegardées</h2>
 </header>
 
 <main>
-  <ul>
-    @for (city of savedCitiesList; track city.name) {
-      <li>
-        <span (click)="onSelectCity(city)">{{ city.name }} - {{ city.country }}</span>
-        <button (click)="onDeleteCity(city)">Supprimer la ville</button>
-      </li>
-    }
-  </ul>
+  @for (city of savedCitiesList; track city.name) {
+    <div class="card-wrapper">
+      <div class="swipe-container">
+        <app-delete-city-card />
+        <app-city-card
+          [cityName]="city.name"
+          [countryCode]="city.country_code"
+          (cardTapped)="onSelectCity(city)"
+          [translateX]="swipedCityID === city.id ? currentTranslateX : 0"
+          (touchstart)="onTouchStart($event, city.id)"
+          (touchmove)="onTouchMove($event)"
+          (touchend)="onTouchEnd($event, city)"
+        />
+      </div>
+    </div>
+  }
 </main>
