@@ -9,5 +9,4 @@ export interface GeocodingResult {
   longitude: number;
   country_code: string;
   country: string;
-  postcodes: string[];
 }
