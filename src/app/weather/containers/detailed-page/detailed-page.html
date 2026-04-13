@@ -1,75 +1,168 @@
-<div>
-  @if (weatherData) {
-    <h2>UV Index: {{ weatherData.daily.uv_index_max[0] | roundNumber }}</h2>
-    <h2>Précipitation: {{ weatherData.current.precipitation }} %</h2>
-    @if (settings) {
-      <h2>
-        Vent: {{ weatherData.current.wind_direction_10m }}°
-        {{ weatherData.current.wind_direction_10m | windDirectionConversion }} -
-        {{ weatherData.current.wind_speed_10m }} {{ settings.windSpeedUnit }}
-      </h2>
+<header>
+  <img
+    src="icons/back_button_icon.svg"
+    alt="back button"
+    (click)="onBackToHomepage()"
+    class="back-icon"
+  />
+  <h2>{{ currentCityName }}</h2>
+</header>
+
+<main>
+  <h3>Aujourd'hui</h3>
+  <section class="detailed-weather-grid">
+    @if (weatherData) {
+      <section>
+        <app-weather-details-card
+          [icon]="'icons/uv-index-icon.svg'"
+          [value]="weatherData.daily.uv_index_max[0] | roundNumber"
+        />
+      </section>
+      <section>
+        <app-weather-details-card
+          [icon]="'icons/precipitation-icon.svg'"
+          [value]="weatherData.current.precipitation"
+          [unit]="'%'"
+        />
+      </section>
+      <section>
+        <app-weather-details-card
+          [icon]="'icons/pressure-icon.svg'"
+          [value]="weatherData.current.pressure_msl | roundNumber"
+          [unit]="'hPa'"
+        />
+      </section>
+      @if (settings) {
+        <section>
+          <app-wind-detailed-card
+            [icon]="'icons/wind-icon.svg'"
+            [symbol]="weatherData.current.wind_direction_10m | windDirectionConversion"
+            [value]="weatherData.current.wind_speed_10m"
+            [unit]="settings.windSpeedUnit"
+          />
+        </section>
+      }
     }
-    <h2>Pression: {{ weatherData.current.pressure_msl | roundNumber }} hPa</h2>
-  }
-</div>
-<div>
-  <h2>Prévisions détaillées</h2>
-  <h3>Température</h3>
-  @if (settings) {
+  </section>
+  <h3>Prévisions d'aujourd'hui</h3>
+  <section class="hourly-forecast">
+    @if (settings) {
+      @if (weatherData) {
+        @for (
+          hourlyForecast of weatherData.hourly.time.slice(currentHourIndex, currentHourIndex + 24);
+          track $index;
+          let i = $index
+        ) {
+          <div class="hour-item">
+            <p>
+              {{ weatherData.hourly.temperature_2m[currentHourIndex + i] | roundNumber }}
+              <span>{{ settings.temperatureUnit | temperatureUnitConversion }}</span>
+            </p>
+            <img
+              [src]="weatherData.hourly.weather_code[currentHourIndex + i] | weatherIconsConversion"
+              alt="weather icon"
+            />
+            <p>{{ weatherData.hourly.precipitation_probability[currentHourIndex + i] }}%</p>
+            <p>{{ weatherData.hourly.time[currentHourIndex + i] | date: 'HH:mm' }}</p>
+          </div>
+        }
+      }
+    }
+  </section>
+
+  <h3>Prévisions de la semaine</h3>
+  <section class="weekly-forecast">
+    @if (settings) {
+      @if (weatherData) {
+        @for (day of weatherData.daily.time; track $index; let i = $index) {
+          <div class="daily-card">
+            <div class="day-info">
+              <p>{{ day | date: 'EEEE' }}</p>
+              <p>{{ day | date: 'd MMM' }}</p>
+            </div>
+            <img
+              [src]="weatherData.daily.weather_code[i] | weatherIconsConversion"
+              alt="weather icon"
+              class="weather-code"
+            />
+            <p class="temperature">
+              {{ weatherData.daily.temperature_2m_min[i] | roundNumber
+              }}{{ settings.temperatureUnit | temperatureUnitConversion }} |
+              {{ weatherData.daily.temperature_2m_max[i] | roundNumber
+              }}{{ settings.temperatureUnit | temperatureUnitConversion }}
+            </p>
+            <p class="precipitation">
+              <img src="icons/precipitation-icon.svg" alt="precipitation icon" class="icon" />
+              {{ weatherData.daily.precipitation_sum[i] | roundNumber
+              }}{{ settings.precipitationUnit }}
+            </p>
+          </div>
+        }
+      }
+    }
+  </section>
+</main>
+
+<!--
+  <div>
+    <h2>Prévisions détaillées</h2>
+    <h3>Température</h3>
+    @if (settings) {
+      @if (weatherData) {
+        <ul>
+          @for (hourlyForecast of weatherData.hourly.time; track $index; let i = $index) {
+            <li>
+              {{ weatherData.hourly.time[i] | date: 'HH:mm' }} -
+              {{ weatherData.hourly.temperature_2m[i] }}
+              {{ settings.temperatureUnit | temperatureUnitConversion }}
+            </li>
+          }
+        </ul>
+      }
+    }
+  </div>
+  <div>
+    <h3>Lever et coucher du soleil</h3>
     @if (weatherData) {
       <ul>
-        @for (hourlyForecast of weatherData.hourly.time; track $index; let i = $index) {
+        @for (sunriseTime of weatherData.daily.sunrise; track $index; let i = $index) {
           <li>
-            {{ weatherData.hourly.time[i] | date: 'HH:mm' }} -
-            {{ weatherData.hourly.temperature_2m[i] }}
-            {{ settings.temperatureUnit | temperatureUnitConversion }}
+            {{ weatherData.daily.sunrise[i] | date: 'HH:mm' }} -
+            {{ weatherData.daily.sunset[i] | date: 'HH:mm' }}
           </li>
         }
       </ul>
     }
-  }
-</div>
-<div>
-  <h3>Lever et coucher du soleil</h3>
-  @if (weatherData) {
-    <ul>
-      @for (sunriseTime of weatherData.daily.sunrise; track $index; let i = $index) {
-        <li>
-          {{ weatherData.daily.sunrise[i] | date: 'HH:mm' }} -
-          {{ weatherData.daily.sunset[i] | date: 'HH:mm' }}
-        </li>
-      }
-    </ul>
-  }
-</div>
-
-<div>
-  <h2>Prévisions de la semaine</h2>
-  @if (settings) {
-    @if (weatherData) {
-      <ul>
-        @for (weeklyForecast of weatherData.daily.time; track $index; let i = $index) {
-          <li>
-            {{ weatherData.daily.time[i] | date: 'EEEE' }} -
-            {{ weatherData.daily.time[i] | date: 'dd MMMM' }} -
-            <img
+  </div>
+  
+  <div>
+    <h2>Prévisions de la semaine</h2>
+    @if (settings) {
+      @if (weatherData) {
+        <ul>
+          @for (weeklyForecast of weatherData.daily.time; track $index; let i = $index) {
+            <li>
+              {{ weatherData.daily.time[i] | date: 'EEEE' }} -
+              {{ weatherData.daily.time[i] | date: 'dd MMMM' }} -
+              <img
               [src]="weatherData.daily.weather_code[i] | weatherIconsConversion"
               alt="Weather Icon"
               style="width: 50px; height: 50px"
-            />
-            - MinTemp: {{ weatherData.daily.temperature_2m_min[i] }}
-            {{ settings.temperatureUnit | temperatureUnitConversion }} - MaxTemp:
-            {{ weatherData.daily.temperature_2m_max[i] }}
-            {{ settings.temperatureUnit | temperatureUnitConversion }} - Precipitation:
-            {{ weatherData.daily.precipitation_sum[i] }}
-            {{ settings.precipitationUnit }}
-          </li>
-        }
-      </ul>
+              />
+              - MinTemp: {{ weatherData.daily.temperature_2m_min[i] }}
+              {{ settings.temperatureUnit | temperatureUnitConversion }} - MaxTemp:
+              {{ weatherData.daily.temperature_2m_max[i] }}
+              {{ settings.temperatureUnit | temperatureUnitConversion }} - Precipitation:
+              {{ weatherData.daily.precipitation_sum[i] }}
+              {{ settings.precipitationUnit }}
+            </li>
+          }
+        </ul>
+      }
     }
-  }
-</div>
-
-<div>
-  <button (click)="onBackToHomepage()">Retour à l'accueil</button>
-</div>
+  </div>
+  
+  <div>
+    <button (click)="onBackToHomepage()">Retour à l'accueil</button>
+  </div>
+  -->
