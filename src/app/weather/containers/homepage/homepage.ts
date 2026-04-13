@@ -92,6 +92,7 @@ export class Homepage implements OnInit {
       state: {
         weatherData: this.currentWeather,
         settings: this.settings,
+        currentCity: this.currentCity,
       },
     });
   }
