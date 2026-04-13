@@ -1,0 +1,36 @@
+.city-card-container {
+  background-color: var(--palladian);
+  border-radius: 30px;
+  border: 2px solid var(--truffle);
+  box-shadow: 2px 2px var(--blue-fantastic);
+  margin: 0.5rem;
+
+  transition:
+    transform 0.1s ease-in-out,
+    background-color 0.1s ease-in-out,
+    box-shadow 0.1s ease-in-out;
+
+  &:active {
+    transform: scale(0.85);
+    background-color: var(--oatmeal);
+    box-shadow: 0 2px 8px var(--blue-fantastic);
+  }
+
+  .card {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 8px;
+
+    img {
+      height: auto;
+      padding-left: 1rem;
+      padding-right: 2rem;
+    }
+
+    p {
+      font-weight: bold;
+    }
+  }
+}

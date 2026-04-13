@@ -1,0 +1,36 @@
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--palladian);
+  border-radius: 1rem;
+  border: 2px solid var(--truffle);
+  width: 6rem;
+  height: 6rem;
+  padding: 0.5rem;
+
+  .icon {
+    height: auto;
+    width: 2rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+  }
+
+  .value-unit {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-items: center;
+
+    span {
+      font-size: 1rem;
+      padding-left: 0.5rem;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+    }
+  }
+}

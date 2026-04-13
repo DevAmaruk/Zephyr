@@ -3,7 +3,7 @@
 </header>
 
 <main>
-  <section class="weather-card">
+  <section class="weather-card-section">
     @if (weatherData$ | async; as weatherData) {
       <app-weather-card
         [cityName]="currentCity?.name"
@@ -14,20 +14,29 @@
         [currentLanguage]="settings.language"
         (saveCityButton)="onSaveCity()"
         (cardTapped)="onCardTapped()"
+        [isCitySaved]="isCitySaved"
+        [cityJustSaved]="cityJustSaved"
       />
     } @else {
-      <p>Bienvenue sur Zephyr. Une application météo qui se veut simple mais élégante.</p>
+      <p>Bienvenue sur Zephyr !</p>
+      <p>Une application météo qui se veut simple mais élégante.</p>
       <p>
         Pour commencer, recherchez une ville en cliquant sur le bouton de recherche en bas à droite.
       </p>
     }
   </section>
-
-  <button (click)="onSearchCity()">Rechercher une ville</button>
-  <button (click)="onSavedCitiesList()">Villes Sauvegardées</button>
 </main>
 
+<button class="fab-search" (click)="onSearchCity()">
+  <img ngSrc="icons/search-button-icon.svg" width="32" height="32" alt="search button" />
+</button>
+<button (click)="onSavedCitiesList()">Villes Sauvegardées</button>
+
 <footer>
-  <button (click)="onSettings()">Paramètres</button>
-  <p>powered by Open-Meteo API</p>
+  <button (click)="onSettings()" class="settings-button">
+    <img ngSrc="icons/settings-icon.svg" width="32" height="32" alt="settings button" />
+    <span class="settings-text">Paramètres</span>
+  </button>
+
+  <p class="open-meteo">powered by Open-Meteo API</p>
 </footer>

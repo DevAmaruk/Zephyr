@@ -1,10 +1,46 @@
-<div (click)="onCardTapped()">
-  <p>{{ cityName }}</p>
-  <p>{{ currentTemperature }} {{ temperatureUnit | temperatureUnitConversion }}</p>
-  <p>{{ feelsLikeTemperature }} {{ temperatureUnit | temperatureUnitConversion }}</p>
-  <p>{{ weatherCode | weatherCodeConversion: currentLanguage }}</p>
-</div>
+<article class="weather-container" (click)="onCardTapped()">
+  <header>
+    <h2>{{ cityName }}</h2>
+  </header>
 
-<div>
-  <button (click)="onSaveCity()">Save City</button>
-</div>
+  <section class="weather-data">
+    <p>
+      <span class="temperature">{{ currentTemperature }}</span>
+      <span class="unit-temperature">{{ temperatureUnit | temperatureUnitConversion }}</span>
+    </p>
+    <p>
+      <span class="feels-like">{{ feelsLikeTemperature }}</span>
+      <span class="unit-feels-like">{{ temperatureUnit | temperatureUnitConversion }}</span>
+    </p>
+    <p>
+      <span class="weather-code">{{ weatherCode | weatherCodeConversion: currentLanguage }}</span>
+    </p>
+  </section>
+  <footer>
+    @if (!isCitySaved) {
+      <button (click)="onSaveCity(); $event.stopPropagation()" type="button" aria-label="Save city">
+        <img
+          ngSrc="icons/save-button-icon.svg"
+          width="32"
+          height="32"
+          alt="save-button-icon"
+          class="save-icon"
+        />
+      </button>
+    } @else {
+      <button
+        (click)="onSaveCity(); $event.stopPropagation()"
+        type="button"
+        aria-label="Unsave city"
+      >
+        <img
+          ngSrc="icons/save-button-filled.svg"
+          width="32"
+          height="32"
+          alt="unsave-button-icon"
+          class="wiggle"
+        />
+      </button>
+    }
+  </footer>
+</article>

@@ -1,16 +1,18 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { Geocoding } from '../../services/geocoding';
 import { Settings } from '../../services/settings';
 import { GeocodingInterface, GeocodingResult } from '../../interfaces/geocoding-interface';
 import { SavedCitiesInterface } from '../../interfaces/saved-cities-interface';
 import { SettingsInterface } from '../../interfaces/settings-interface';
+import { CityCard } from '../../components/city-card/city-card';
+import { SavedCities } from '../../services/saved-cities';
 
 @Component({
   selector: 'app-search-page',
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, NgOptimizedImage, CityCard],
   templateUrl: './search-page.html',
   styleUrl: './search-page.scss',
 })
@@ -29,6 +31,8 @@ export class SearchPage implements OnInit {
   protected geocodingData$?: Observable<GeocodingInterface>;
   protected selectedCity?: SavedCitiesInterface;
 
+  protected selectedCityID: number = 0;
+
   settings: SettingsInterface = this.settingsService.getSettings();
 
   ngOnInit() {
@@ -43,11 +47,14 @@ export class SearchPage implements OnInit {
 
   public onSelectCity(city: GeocodingResult) {
     this.selectedCity = {
+      id: city.id,
       name: city.name,
       country: city.country,
+      country_code: city.country_code,
       lat: city.latitude,
       lon: city.longitude,
     };
+    this.selectedCityID = city.id;
   }
 
   public onInputChange(query: string) {
@@ -58,5 +65,9 @@ export class SearchPage implements OnInit {
     if (this.selectedCity) {
       this._router.navigate(['/home'], { queryParams: { ...this.selectedCity } });
     }
+  }
+
+  public onBackToHomepage() {
+    globalThis.history.back();
   }
 }

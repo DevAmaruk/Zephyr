@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --palladian: #eee9df;
+  --oatmeal: #c9c1b1;
+  --blue-fantastic: #2c3b4d;
+  --burning-flame: #ffb162;
+  --truffle: #a35139;
+  --abyss: #1b2632;
+}
+
+html,
+body {
+  min-height: 100%;
+  background: linear-gradient(to bottom, #87ceeb 0%, #b0c4de 60%, #dde6f3 100%);
+  background-attachment: fixed;
+}

@@ -5,14 +5,14 @@ import { SettingsInterface } from '../../interfaces/settings-interface';
 import { filter, Observable, switchMap, tap } from 'rxjs';
 import { WeatherInterface } from '../../interfaces/weather-interface';
 import { WeatherCard } from '../../components/weather-card/weather-card';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SavedCitiesInterface } from '../../interfaces/saved-cities-interface';
 import { SavedCities } from '../../services/saved-cities';
 
 @Component({
   selector: 'app-homepage',
-  imports: [WeatherCard, AsyncPipe],
+  imports: [WeatherCard, AsyncPipe, NgOptimizedImage],
   templateUrl: './homepage.html',
   styleUrl: './homepage.scss',
 })
@@ -30,16 +30,22 @@ export class Homepage implements OnInit {
 
   protected settings: SettingsInterface = this.settingsService.getSettings();
 
+  protected isCitySaved: boolean = false;
+  protected cityJustSaved: boolean = false;
+
   ngOnInit() {
     this.weatherData$ = this._activatedRoute.queryParams.pipe(
       filter((params) => params['lat'] && params['lon']),
       tap((params) => {
         this.currentCity = {
+          id: params['id'],
           name: params['name'],
           lat: params['lat'],
           lon: params['lon'],
           country: params['country'],
+          country_code: params['country_code'],
         };
+        this.isCitySaved = this.savedCitiesService.isCitySaved(this.currentCity);
       }),
       switchMap((params) =>
         this.weatherService.getWeather(
@@ -66,7 +72,14 @@ export class Homepage implements OnInit {
 
   public onSaveCity() {
     if (this.currentCity) {
-      this.savedCitiesService.save(this.currentCity);
+      if (this.isCitySaved) {
+        this.savedCitiesService.delete(this.currentCity);
+      } else {
+        this.savedCitiesService.save(this.currentCity);
+        this.cityJustSaved = true;
+        setTimeout(() => (this.cityJustSaved = false), 500);
+      }
+      this.isCitySaved = this.savedCitiesService.isCitySaved(this.currentCity);
     }
   }
 
@@ -79,6 +92,7 @@ export class Homepage implements OnInit {
       state: {
         weatherData: this.currentWeather,
         settings: this.settings,
+        currentCity: this.currentCity,
       },
     });
   }

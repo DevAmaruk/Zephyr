@@ -1,0 +1,24 @@
+<article
+  class="city-card-container"
+  (click)="onCitySelected()"
+  [style.transform]="'translateX(' + translateX + 'px)'"
+>
+  <section class="card">
+    @if (cityName && countryCode) {
+      <img
+        [ngSrc]="
+          'https://hatscripts.github.io/circle-flags/flags/' + countryCode.toLowerCase() + '.svg'
+        "
+        width="36"
+        height="36"
+        [alt]="cityName + ' flag'"
+      />
+      <p>{{ cityName }}</p>
+    }
+    @if (isSelected) {
+      <span class="checkmark"
+        ><img ngSrc="icons/checkmark-icon.svg" width="24" height="24" alt="selected city"
+      /></span>
+    }
+  </section>
+</article>
