@@ -1,0 +1,16 @@
+<article class="card-container">
+  <section class="icon">
+    @if (icon) {
+      <img [src]="icon" alt="weather icon" />
+    }
+  </section>
+  <section class="value-unit">
+    @if (value != null) {
+      <p>{{ value }}</p>
+    }
+
+    @if (unit) {
+      <span>{{ unit }}</span>
+    }
+  </section>
+</article>
